@@ -1,0 +1,88 @@
+/* ===== Formulaire de la page login ===== */
+
+/* Centrage général du contenu de la page login */
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+/* Titre “Log In” */
+main h2 {
+  font-family: "Syne";
+  font-weight: 700;
+  font-size: 30px;
+  color: #1d6154;
+  margin-bottom: 30px;
+}
+
+/* Structure du formulaire */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  max-width: 400px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Label des champs */
+form label {
+  font-family: "Work Sans";
+  font-weight: 600;
+  font-size: 14px;
+  color: #3d3d3d;
+  align-self: flex-start;
+}
+
+/* Champs de texte */
+form input[type="email"],
+form input[type="password"] {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-family: "Work Sans";
+  font-size: 14px;
+}
+
+/* Bouton “Se connecter” */
+form input[type="submit"] {
+  font-family: "Syne";
+  font-weight: 700;
+  color: white;
+  background-color: #1d6154;
+  margin-top: 10px;
+  width: 180px;
+  text-align: center;
+  border-radius: 60px;
+  border: none;
+  padding: 10px 20px;
+}
+
+/* Effet hover sur le bouton */
+form input[type="submit"]:hover {
+  background-color: #144a3a;
+}
+
+/* Lien “Mot de passe oublié” */
+form a {
+  font-size: 12px;
+  color: #333;
+  text-decoration: none;
+  margin-top: 10px;
+  align-self: center;
+}
+footer {
+  position: absolute;
+  bottom: 20px;
+  right: 30px;
+}
+
+footer a {
+  font-size: 12px;
+  color: #333;
+  text-decoration: none;
+}
