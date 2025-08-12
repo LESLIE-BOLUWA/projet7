@@ -5,29 +5,41 @@
     <link rel="stylesheet" href="assets/login.css" />
     <meta charset="UTF-8" />
     <title>Connexion</title>
+        <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="./assets/login.js" defer></script>
   </head>
   <body>
     <header>
       <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
       <nav>
         <ul>
-          <li>projets</li>
-          <li>contact</li>
-          <li>login</li>
-          <li><img src="./assets/icons/instagram.png" alt="Instagram" /></li>
+          <li><a href="index.html#portfolio" class="nav-link">projets</a></li>
+          <li><a href="index.html#contact" class="nav-link">contact</a></li>
+          <li><a href="#" class="active-link">login</a></li>
+
+            <a href="#"
+              ><img src="./assets/icons/instagram.png" alt="Instagram"
+            /></a>
+          </li>
         </ul>
       </nav>
     </header>
-
     <main>
-      <main>
+      <div id="login">
         <h2>Log In</h2>
 
         <form>
+          <p id="error-message"></p>
           <label for="email">E-mail</label>
           <input type="email" id="email" name="email" required />
-
           <label for="password">Mot de passe</label>
           <input type="password" id="password" name="password" required />
 
@@ -35,11 +47,14 @@
 
           <a href="#">Mot de passe oublié</a>
         </form>
-      </main>
+      </div>
     </main>
-
     <footer>
-      <p><a href="#">Mentions légales</a></p>
+      <nav>
+        <ul>
+          <li>Mentions Légales</li>
+        </ul>
+      </nav>
     </footer>
   </body>
 </html>

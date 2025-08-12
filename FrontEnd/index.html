@@ -10,18 +10,33 @@
       href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
       rel="stylesheet"
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
     <meta name="description" content="" />
     <link rel="stylesheet" href="./assets/style.css" />
     <script src="./assets/index.js" defer></script>
   </head>
   <body>
+    <div class="edition-banner hidden">
+      <p><i class="fa-regular fa-pen-to-square"></i> Mode édition</p>
+    </div>
+
     <header>
       <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
       <nav>
         <ul>
-          <li>projets</li>
-          <li>contact</li>
-          <li>login</li>
+          <li><a href="#portfolio">projets</a></li>
+          <li><a href="#contact">contact</a></li>
+          <li><a href="login.html" id="login-link">login</a></li>
           <li><img src="./assets/icons/instagram.png" alt="Instagram" /></li>
         </ul>
       </nav>
@@ -51,8 +66,16 @@
         </article>
       </section>
       <section id="portfolio">
-        <h2>Mes Projets</h2>
+        <h2>
+          Mes Projets
+          <button class="button-edit hidden">
+            <i class="fa-regular fa-pen-to-square"></i> Modifier
+          </button>
+        </h2>
+
+        <!-- ajout du bouton modifier -->
         <!-- ajout des boutons du filtre -->
+
         <div class="filters"></div>
         <div class="gallery">
           <figure>
@@ -145,6 +168,54 @@
         </form>
       </section>
     </main>
+
+    <!-- Overlay -->
+    <div id="modalOverlay" class="modal-overlay hidden"></div>
+
+    <!-- Modale -->
+    <div id="modal" class="modal hidden">
+      <!-- Bouton fermer -->
+      <span id="closeModalBtn" class="modal-close">&times;</span>
+
+      <!-- Vue 1 : Galerie -->
+      <div id="modalGalleryView">
+        <h2>Galerie photo</h2>
+        <div class="modal-gallery"></div>
+        <button id="openAddPhotoForm" class="add-photo-btn">
+          Ajouter une photo
+        </button>
+      </div>
+
+      <!-- Vue 2 : Formulaire -->
+      <div id="modalFormView">
+        <button id="backToGallery" class="btn-back">&#8592;</button>
+        <h2>Ajout photo</h2>
+
+        <form id="addPhotoForm">
+          <label for="photo">Image :</label>
+          <input
+            type="file"
+            id="photo"
+            name="image"
+            accept="image/*"
+            required
+          />
+
+          <label for="title">Titre :</label>
+          <input type="text" id="title" name="title" required />
+
+          <label for="category">Catégorie :</label>
+          <select id="category" name="category" required>
+            <option value="">Sélectionner une catégorie</option>
+            <option value="1">Objets</option>
+            <option value="2">Appartements</option>
+            <option value="3">Hôtels & restaurants</option>
+          </select>
+
+          <button type="submit" class="btn-primary">Valider</button>
+        </form>
+      </div>
+    </div>
 
     <footer>
       <nav>

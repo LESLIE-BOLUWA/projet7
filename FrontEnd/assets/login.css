@@ -1,24 +1,14 @@
 /* ===== Formulaire de la page login ===== */
 
 /* Centrage général du contenu de la page login */
-main {
+/* main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 20px;
-}
-
-/* Titre “Log In” */
-main h2 {
-  font-family: "Syne";
-  font-weight: 700;
-  font-size: 30px;
-  color: #1d6154;
-  margin-bottom: 30px;
-}
+} */
 
 /* Structure du formulaire */
-form {
+/* form {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -26,19 +16,19 @@ form {
   max-width: 400px;
   width: 100%;
   margin: 0 auto;
-}
+} */
 
 /* Label des champs */
-form label {
+/* form label {
   font-family: "Work Sans";
   font-weight: 600;
   font-size: 14px;
   color: #3d3d3d;
   align-self: flex-start;
-}
+} */
 
 /* Champs de texte */
-form input[type="email"],
+/* form input[type="email"],
 form input[type="password"] {
   width: 100%;
   padding: 12px;
@@ -46,10 +36,10 @@ form input[type="password"] {
   border-radius: 5px;
   font-family: "Work Sans";
   font-size: 14px;
-}
+} */
 
 /* Bouton “Se connecter” */
-form input[type="submit"] {
+/* form input[type="submit"] {
   font-family: "Syne";
   font-weight: 700;
   color: white;
@@ -60,22 +50,22 @@ form input[type="submit"] {
   border-radius: 60px;
   border: none;
   padding: 10px 20px;
-}
+} */
 
 /* Effet hover sur le bouton */
-form input[type="submit"]:hover {
+/* form input[type="submit"]:hover {
   background-color: #144a3a;
-}
+} */
 
 /* Lien “Mot de passe oublié” */
-form a {
+/* form a {
   font-size: 12px;
   color: #333;
   text-decoration: none;
   margin-top: 10px;
   align-self: center;
-}
-footer {
+} */
+/* footer {
   position: absolute;
   bottom: 20px;
   right: 30px;
@@ -85,4 +75,66 @@ footer a {
   font-size: 12px;
   color: #333;
   text-decoration: none;
+} */
+
+body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+/* contenu principal de la page  */
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 100px;
+}
+/* conteneur du formulaire  */
+#login {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+/* champs du formulaire  */
+#login label {
+  margin: 2em 0 1em 0;
+}
+#login input {
+  height: 50px;
+  font-size: 1.2em;
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+#login > * {
+  text-align: center;
+}
+
+#login form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 37px;
+  text-align: left;
+}
+
+#login a {
+  font-weight: 500;
+  font-size: 14px;
+  text-decoration: underline;
+  text-align: center;
+  color: #3d3d3d;
+}
+.active-link {
+  font-weight: 600;
+}
+
+footer {
+  margin-top: auto;
+}
+
+#error-message {
+  color: red;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 10px;
 }

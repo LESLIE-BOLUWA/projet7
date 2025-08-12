@@ -89,3 +89,119 @@ function setActiveButton(activeButton) {
   buttons.forEach((btn) => btn.classList.remove("active")); // retire la classe à tous
   activeButton.classList.add("active"); // ajoute au bouton cliqué
 }
+// ====================
+// Vérifie si un utilisateur est connecté
+// ====================
+function checkLoginStatus() {
+  const token = localStorage.getItem("token");
+
+  if (token !== null) {
+    editionMode(); // Met à jour l'interface en mode édition
+    modal(); // Gère l'ouverture et la fermeture de la modale
+    setupLogout(); // Prépare le bouton de déconnexion
+  }
+}
+
+// ====================
+// Active le mode édition (UI pour utilisateur connecté)
+// ====================
+function editionMode() {
+  // Changer "login" → "logout"
+  const loginLogoutLink = document.getElementById("login-link");
+  loginLogoutLink.href = "#";
+  loginLogoutLink.textContent = "logout";
+
+  // Masquer les filtres
+  const filters = document.querySelector(".filters");
+  if (filters) filters.classList.add("hidden");
+
+  // Afficher le bouton "Modifier"
+  const editButton = document.querySelector(".button-edit");
+  if (editButton) editButton.classList.remove("hidden");
+
+  // Afficher le bandeau noir "mode édition"
+  const editionBanner = document.querySelector(".edition-banner");
+  if (editionBanner) editionBanner.classList.remove("hidden");
+}
+
+// ====================
+// Gère l'ouverture et la fermeture de la modale
+// ====================
+function modal() {
+  const modalebtn = document.querySelector(".button-edit"); // bouton Modifier
+  const modal = document.getElementById("modal"); // boîte modale
+  const overlay = document.getElementById("modalOverlay"); // fond gris
+  const modaleclose = document.getElementById("closeModalBtn"); // croix
+
+  // Ouvre la modale au clic sur "Modifier"
+  modalebtn.addEventListener("click", () => {
+    modal.classList.remove("hidden");
+    overlay.classList.remove("hidden");
+    displayWorksInModal();
+  });
+
+  // Ferme la modale (croix et overlay)
+  modaleclose.addEventListener("click", closeModal);
+  overlay.addEventListener("click", closeModal);
+
+  function closeModal() {
+    modal.classList.add("hidden");
+    overlay.classList.add("hidden");
+  }
+}
+
+// ====================
+// Affiche tous les travaux dans la modale
+// ====================
+function displayWorksInModal() {
+  const modalGallery = document.querySelector(".modal-gallery");
+  modalGallery.innerHTML = ""; // Vide avant de remplir
+
+  console.log("Contenu de allProjects :", allProjects);
+
+  for (let i = 0; i < allProjects.length; i++) {
+    const work = allProjects[i];
+
+    // Conteneur figure
+    const figure = document.createElement("figure");
+    figure.classList.add("gallery-item");
+
+    // Image
+    const img = document.createElement("img");
+    img.src = work.imageUrl;
+    img.alt = work.title;
+
+    // Bouton poubelle
+    const deleteBtn = document.createElement("button");
+    deleteBtn.classList.add("delete-btn");
+    deleteBtn.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
+    deleteBtn.addEventListener("click", () => {
+      console.log("Suppression du projet :", work.id);
+      // Ici → Fetch DELETE + mise à jour
+    });
+
+    // Ajout dans figure
+    figure.appendChild(img);
+    figure.appendChild(deleteBtn);
+
+    // Ajout dans la galerie
+    modalGallery.appendChild(figure);
+  }
+}
+
+// ====================
+// Gère le bouton de déconnexion
+// ====================
+function setupLogout() {
+  const loginLogoutLink = document.getElementById("login-link");
+  loginLogoutLink.addEventListener("click", (event) => {
+    event.preventDefault(); // Empêche le lien normal
+    localStorage.removeItem("token"); // Supprime le token
+    window.location.href = "index.html"; // Retour à l'accueil
+  });
+}
+
+// ====================
+// Lancement au chargement de la page
+// ====================
+checkLoginStatus();
