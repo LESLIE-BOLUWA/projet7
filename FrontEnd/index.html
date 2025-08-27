@@ -77,82 +77,7 @@
         <!-- ajout des boutons du filtre -->
 
         <div class="filters"></div>
-        <div class="gallery">
-          <figure>
-            <img src="assets/images/abajour-tahina.png" alt="Abajour Tahina" />
-            <figcaption>Abajour Tahina</figcaption>
-          </figure>
-          <figure>
-            <img
-              src="assets/images/appartement-paris-v.png"
-              alt="Appartement Paris V"
-            />
-            <figcaption>Appartement Paris V</figcaption>
-          </figure>
-          <figure>
-            <img
-              src="assets/images/restaurant-sushisen-londres.png"
-              alt="Restaurant Sushisen - Londres"
-            />
-            <figcaption>Restaurant Sushisen - Londres</figcaption>
-          </figure>
-          <figure>
-            <img
-              src="assets/images/la-balisiere.png"
-              alt="Villa “La Balisiere” - Port Louis"
-            />
-            <figcaption>Villa “La Balisiere” - Port Louis</figcaption>
-          </figure>
-          <figure>
-            <img
-              src="assets/images/structures-thermopolis.png"
-              alt="Structures Thermopolis"
-            />
-            <figcaption>Structures Thermopolis</figcaption>
-          </figure>
-          <figure>
-            <img
-              src="assets/images/appartement-paris-x.png"
-              alt="Appartement Paris X"
-            />
-            <figcaption>Appartement Paris X</figcaption>
-          </figure>
-          <figure>
-            <img
-              src="assets/images/le-coteau-cassis.png"
-              alt="Pavillon “Le coteau” - Cassis"
-            />
-            <figcaption>Pavillon “Le coteau” - Cassis</figcaption>
-          </figure>
-          <figure>
-            <img
-              src="assets/images/villa-ferneze.png"
-              alt="Villa Ferneze - Isola d’Elba"
-            />
-            <figcaption>Villa Ferneze - Isola d’Elba</figcaption>
-          </figure>
-          <figure>
-            <img
-              src="assets/images/appartement-paris-xviii.png"
-              alt="Appartement Paris XVIII"
-            />
-            <figcaption>Appartement Paris XVIII</figcaption>
-          </figure>
-          <figure>
-            <img
-              src="assets/images/bar-lullaby-paris.png"
-              alt="Bar “Lullaby” - Paris"
-            />
-            <figcaption>Bar “Lullaby” - Paris</figcaption>
-          </figure>
-          <figure>
-            <img
-              src="assets/images/hotel-first-arte-new-delhi.png"
-              alt="Hotel First Arte - New Delhi"
-            />
-            <figcaption>Hotel First Arte - New Delhi</figcaption>
-          </figure>
-        </div>
+        <div class="gallery"></div>
       </section>
       <section id="contact">
         <h2>Contact</h2>
@@ -187,17 +112,30 @@
       </div>
 
       <!-- Vue 2 : Formulaire -->
-      <div id="modalFormView">
+      <div id="modalFormView" class="hidden">
         <button id="backToGallery" class="btn-back">&#8592;</button>
         <h2>Ajout photo</h2>
 
         <form id="addPhotoForm">
-          <label for="photo">Image :</label>
+          <div id="previewBtn" class="preview">
+            <div class="preview-content">
+              <img src="assets/icons/image-preview.png" alt="icon preview" />
+              <button class="select-photo-btn">+ Ajouter photo</button>
+              <span>jpg, png : 4mo max</span>
+            </div>
+            <img
+              class="hidden"
+              id="previewImage"
+              src=""
+              alt="Aperçu de l'image"
+            />
+          </div>
           <input
+            class="hidden"
             type="file"
             id="photo"
             name="image"
-            accept="image/*"
+            accept="image/png, image/jpeg"
             required
           />
 
@@ -205,14 +143,10 @@
           <input type="text" id="title" name="title" required />
 
           <label for="category">Catégorie :</label>
-          <select id="category" name="category" required>
-            <option value="">Sélectionner une catégorie</option>
-            <option value="1">Objets</option>
-            <option value="2">Appartements</option>
-            <option value="3">Hôtels & restaurants</option>
-          </select>
+          <select id="category" name="category" required></select>
 
           <button type="submit" class="btn-primary">Valider</button>
+          <!-- <p id="formMsg" class="form-msg"></p> -->
         </form>
       </div>
     </div>

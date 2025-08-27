@@ -307,7 +307,7 @@ footer nav ul {
 
 /*Masqué les éléments sur la page */
 .hidden {
-  display: none;
+  display: none !important;
 }
 /*Bouton modifier */
 
@@ -329,11 +329,8 @@ footer nav ul {
   font-size: 16px;
   gap: 10px;
 }
-/*MODALE*/
 
-.hidden {
-  display: none;
-}
+/* === MODALE === */
 
 /* === OVERLAY === */
 .modal-overlay {
@@ -346,7 +343,6 @@ footer nav ul {
   z-index: 10;
 }
 
-/* === MODALE === */
 .modal {
   position: fixed;
   top: 50%;
@@ -378,7 +374,7 @@ footer nav ul {
   color: #333;
 }
 
-/* === GALERIE === */
+/* === VIEW 1 === */
 .modal-gallery {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -497,4 +493,48 @@ footer nav ul {
 
 #modalFormView button[type="submit"]:hover {
   background-color: #15443c;
+}
+.form-msg {
+  font-size: 0.9rem;
+  margin: 8px 0;
+}
+.form-msg.error {
+  color: #c0392b;
+}
+.form-msg.success {
+  color: #1d6154;
+}
+
+.preview {
+  height: 169px;
+  background-color: #e8f1f6;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.preview-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.select-photo-btn {
+  display: block;
+  margin: 0 auto;
+  padding: 10px 20px;
+  background-color: #cbd6dc;
+  color: #306685;
+  border: none;
+  border-radius: 50px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#previewImage {
+  width: 129px;
+  height: 166px;
 }
