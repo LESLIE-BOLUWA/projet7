@@ -27,6 +27,7 @@ async function getCategories() {
     return [];
   }
 }
+
 //  Fonction qui affiche une liste de projets dans la galerie
 function displayWorks(works) {
   // On cible la div qui contient la galerie
@@ -335,15 +336,15 @@ function setAddPhotoFormEvent() {
   }
 }
 
-// Vérifie si un utilisateur est connecté
-async function checkLoginStatus() {
+// Initialisation de la page
+async function initializePage() {
   categoriesGlobal = await getCategories();
   const works = await getWorks(); // Récupère les projets
   displayWorks(works); // Affiche tous les projets
   displayFilters(works); // Affiche tous les filtres
-
   const token = localStorage.getItem("token");
 
+  // Vérifie si un utilisateur est connecté
   if (token !== null) {
     showEditBanner();
     setupLogout();
@@ -358,4 +359,4 @@ async function checkLoginStatus() {
 }
 
 // Lancement au chargement de la page
-checkLoginStatus();
+initializePage();
