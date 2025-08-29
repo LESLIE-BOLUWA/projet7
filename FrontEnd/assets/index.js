@@ -280,8 +280,6 @@ function setAddPhotoFormEvent() {
         const file = fileInput.files[0]; // Récupère le premier fichier sélectionné
         const categoryId = parseInt(categorySelect.value, 10); // Récupère l'ID de la catégorie
 
-        // createWork(title, file, categoryId); // Crée le projet
-
         const formData = new FormData();
         formData.append("title", title);
         formData.append("image", file); // file = objet File (image choisie)
