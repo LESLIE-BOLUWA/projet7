@@ -151,7 +151,7 @@ function showEditButton() {
   // Afficher le bouton "Modifier"
   const editButton = document.querySelector(".button-edit");
   if (editButton) editButton.classList.remove("hidden");
-  editButton.addEventListener("click", () => {
+  editButton.addEventListener("click", function () {
     const modal = document.getElementById("modal"); // boîte modale
     const overlay = document.getElementById("modalOverlay"); // fond gris
     modal.classList.remove("hidden");
@@ -161,18 +161,25 @@ function showEditButton() {
 }
 
 function setModalEvents() {
+  const modal = document.getElementById("modal"); // boîte modale
   const overlay = document.getElementById("modalOverlay");
   const modalClose = document.getElementById("closeModalBtn"); // croix
   const openFormBtn = document.getElementById("openAddPhotoForm");
   const backBtn = document.getElementById("backToGallery");
 
-  modalClose.addEventListener("click", closeModal); // Fermer avec croix
-  overlay.addEventListener("click", closeModal); // Fermer en cliquant sur fond
+  modalClose.addEventListener("click", () => {
+    modal.classList.add("hidden");
+    overlay.classList.add("hidden");
+  }); // Fermer avec croix
+  overlay.addEventListener("click", () => {
+    modal.classList.add("hidden");
+    overlay.classList.add("hidden");
+  }); // Fermer en cliquant sur fond
 
-  openFormBtn.addEventListener("click", (event) => {
+  openFormBtn.addEventListener("click", () => {
     showModalView("form");
   });
-  backBtn.addEventListener("click", (event) => {
+  backBtn.addEventListener("click", () => {
     showModalView("gallery");
   });
 }
@@ -231,14 +238,6 @@ function displayWorksInModal(works) {
     // Ajout dans la galerie
     modalGallery.appendChild(figure);
   }
-}
-
-// Ferme la modale
-function closeModal() {
-  const modal = document.getElementById("modal"); // boîte modale
-  const overlay = document.getElementById("modalOverlay"); // fond gris
-  modal.classList.add("hidden");
-  overlay.classList.add("hidden");
 }
 
 // Crée un nouveau projet
@@ -322,7 +321,6 @@ function setAddPhotoFormEvent() {
         const categoryId = parseInt(categorySelect.value, 10); // Récupère l'ID de la catégorie
 
         createWork(title, file, categoryId); // Crée le projet
-        addPhotoForm.reset(); // Réinitialise le formulaire
       }
     });
 
@@ -342,8 +340,8 @@ async function initializePage() {
   const works = await getWorks(); // Récupère les projets
   displayWorks(works); // Affiche tous les projets
   displayFilters(works); // Affiche tous les filtres
-  const token = localStorage.getItem("token");
 
+  const token = localStorage.getItem("token");
   // Vérifie si un utilisateur est connecté
   if (token !== null) {
     showEditBanner();
