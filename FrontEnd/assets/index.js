@@ -240,46 +240,6 @@ function displayWorksInModal(works) {
   }
 }
 
-// Crée un nouveau projet
-async function createWork(title, file, categoryId) {
-  try {
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("image", file); // file = objet File (image choisie)
-    formData.append("category", categoryId); // categoryId = ID de la catégorie
-
-    const token = localStorage.getItem("token"); // Récupère le token
-
-    const response = await fetch("http://localhost:5678/api/works", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      body: formData,
-    });
-
-    if (!response.ok) {
-      throw new Error(`Erreur API : ${response.status}`);
-    }
-
-    const data = await response.json();
-    console.log("Projet créé :", data);
-
-    // Met à jour la galerie et retourne sur la vue galerie
-    const works = await getWorks();
-    displayWorks(works);
-    displayWorksInModal(works);
-
-    let addPhotoForm = document.getElementById("addPhotoForm");
-    addPhotoForm.reset(); // Réinitialise le formulaire
-
-    showModalView("gallery");
-  } catch (error) {
-    alert("Erreur lors de la création du projet");
-    console.error("Erreur lors de la création du projet :", error);
-  }
-}
-
 function setPreviewButtonEvent() {
   const previewBtn = document.getElementById("previewBtn");
   if (previewBtn) {
@@ -309,7 +269,7 @@ function setPreviewButtonEvent() {
 function setAddPhotoFormEvent() {
   const addPhotoForm = document.getElementById("addPhotoForm");
   if (addPhotoForm) {
-    addPhotoForm.addEventListener("submit", (event) => {
+    addPhotoForm.addEventListener("submit", async (event) => {
       event.preventDefault(); // Empêche le rechargement de la page
 
       const title = document.getElementById("title").value; // Récupère le titre
@@ -320,7 +280,36 @@ function setAddPhotoFormEvent() {
         const file = fileInput.files[0]; // Récupère le premier fichier sélectionné
         const categoryId = parseInt(categorySelect.value, 10); // Récupère l'ID de la catégorie
 
-        createWork(title, file, categoryId); // Crée le projet
+        // createWork(title, file, categoryId); // Crée le projet
+
+        const formData = new FormData();
+        formData.append("title", title);
+        formData.append("image", file); // file = objet File (image choisie)
+        formData.append("category", categoryId); // categoryId = ID de la catégorie
+
+        const token = localStorage.getItem("token"); // Récupère le token
+
+        const response = await fetch("http://localhost:5678/api/works", {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          body: formData,
+        });
+
+        if (response.ok) {
+          // Met à jour la galerie et retourne sur la vue galerie
+          const works = await getWorks();
+          displayWorks(works);
+          displayWorksInModal(works);
+
+          addPhotoForm.reset(); // Réinitialise le formulaire
+
+          showModalView("gallery");
+        } else {
+          alert("Erreur lors de la création du projet");
+          console.error("Erreur lors de la création du projet :", error);
+        }
       }
     });
 
