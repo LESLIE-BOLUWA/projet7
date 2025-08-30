@@ -143,7 +143,11 @@
           <input type="text" id="title" name="title" required />
 
           <label for="category">Catégorie :</label>
-          <select id="category" name="category" required></select>
+          <select id="category" name="category" required>
+            <option value="" disabled selected>
+              --Sélectionner une catégorie--
+            </option>
+          </select>
 
           <button type="submit" class="btn-primary">Valider</button>
           <!-- <p id="formMsg" class="form-msg"></p> -->

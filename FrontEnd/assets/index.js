@@ -268,57 +268,77 @@ function setPreviewButtonEvent() {
 
 function setAddPhotoFormEvent() {
   const addPhotoForm = document.getElementById("addPhotoForm");
-  if (addPhotoForm) {
-    addPhotoForm.addEventListener("submit", async (event) => {
-      event.preventDefault(); // Empêche le rechargement de la page
+  if (!addPhotoForm) return;
 
-      const title = document.getElementById("title").value; // Récupère le titre
-      const fileInput = document.getElementById("photo"); // Sélecteur de fichier
-      const categorySelect = document.getElementById("category"); // Sélecteur de catégorie
+  const submitBtn = addPhotoForm.querySelector('button[type="submit"]');
+  const titleInput = document.getElementById("title");
+  const fileInput = document.getElementById("photo");
+  const categorySelect = document.getElementById("category");
 
-      if (fileInput.files.length > 0 && categorySelect.value) {
-        const file = fileInput.files[0]; // Récupère le premier fichier sélectionné
-        const categoryId = parseInt(categorySelect.value, 10); // Récupère l'ID de la catégorie
+  //Par défaut : bouton désactivé (→ gris via :disabled en CSS)
+  submitBtn.disabled = true;
 
-        const formData = new FormData();
-        formData.append("title", title);
-        formData.append("image", file); // file = objet File (image choisie)
-        formData.append("category", categoryId); // categoryId = ID de la catégorie
+  //  Active/désactive selon les champs
+  const updateSubmitState = () => {
+    const titleOk = titleInput.value.trim() !== "";
+    const fileOk = fileInput.files.length > 0;
+    const catOk = categorySelect.value !== "";
+    submitBtn.disabled = !(titleOk && fileOk && catOk);
+  };
 
-        const token = localStorage.getItem("token"); // Récupère le token
+  // Écoute les changements des champs
+  titleInput.addEventListener("input", updateSubmitState);
+  fileInput.addEventListener("change", updateSubmitState);
+  categorySelect.addEventListener("change", updateSubmitState);
 
-        const response = await fetch("http://localhost:5678/api/works", {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          body: formData,
-        });
+  //Soumission du formulaire
+  addPhotoForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (submitBtn.disabled) return; // sécurité
 
-        if (response.ok) {
-          // Met à jour la galerie et retourne sur la vue galerie
-          const works = await getWorks();
-          displayWorks(works);
-          displayWorksInModal(works);
+    const title = titleInput.value.trim();
+    const file = fileInput.files[0];
+    const categoryId = parseInt(categorySelect.value, 10);
 
-          addPhotoForm.reset(); // Réinitialise le formulaire
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("image", file);
+    formData.append("category", categoryId);
 
-          showModalView("gallery");
-        } else {
-          alert("Erreur lors de la création du projet");
-          console.error("Erreur lors de la création du projet :", error);
-        }
-      }
+    const token = localStorage.getItem("token");
+
+    const response = await fetch("http://localhost:5678/api/works", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${token}` },
+      body: formData,
     });
 
-    addPhotoForm.addEventListener("reset", () => {
-      const img = document.getElementById("previewImage"); // Image de prévisualisation
-      const previewContent = document.querySelector(".preview-content");
+    if (response.ok) {
+      const works = await getWorks();
+      displayWorks(works);
+      displayWorksInModal(works);
+
+      addPhotoForm.reset(); // vide le formulaire
+      submitBtn.disabled = true; // redevient gris
+      updateSubmitState(); // sécurité après reset
+      showModalView("gallery"); // retour vue 1
+    } else {
+      alert("Erreur lors de la création du projet");
+      console.error("Erreur lors de la création du projet :", response.status);
+    }
+  });
+
+  // Reset : remet l’état initial + preview
+  addPhotoForm.addEventListener("reset", () => {
+    const img = document.getElementById("previewImage");
+    const previewContent = document.querySelector(".preview-content");
+    if (img && previewContent) {
       img.src = "";
       img.classList.add("hidden");
-      previewContent.classList.remove("hidden"); // Affiche le contenu initial
-    });
-  }
+      previewContent.classList.remove("hidden");
+    }
+    submitBtn.disabled = true;
+  });
 }
 
 // Initialisation de la page

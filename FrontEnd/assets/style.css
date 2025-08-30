@@ -494,6 +494,12 @@ footer nav ul {
 #modalFormView button[type="submit"]:hover {
   background-color: #15443c;
 }
+#modalFormView button[type="submit"]:disabled {
+  background-color: #ccc; /* gris clair */
+  color: white;
+  cursor: not-allowed;
+}
+
 .form-msg {
   font-size: 0.9rem;
   margin: 8px 0;
